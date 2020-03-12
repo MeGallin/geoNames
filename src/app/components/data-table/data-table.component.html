@@ -1,0 +1,221 @@
+<ng-template [ngIf]="error">{{ error }}</ng-template>
+
+<ng-template [ngIf]="showSingleCountry">
+  <div class="single-country-wrapper" [@slideInOut]>
+    <div class="inner-country-wrapper-left">
+      <h3>Info</h3>
+      <div>
+        <span class="single-country-titles">Continent:</span>
+        <span>{{ continentName }}</span>
+        <span *ngIf="!continentName">N/A</span>
+      </div>
+
+      <div>
+        <span class="single-country-titles">Continent Code:</span
+        >{{ continent }}
+        <span *ngIf="!continent">N/A</span>
+      </div>
+      <div>
+        <span class="single-country-titles">languages:</span>{{ languages }}
+        <span *ngIf="!languages">N/A</span>
+      </div>
+      <div>
+        <span class="single-country-titles">Country:</span>{{ countryName }}
+        <span *ngIf="!countryName">N/A</span>
+      </div>
+      <div>
+        <span class="single-country-titles">Capital:</span>{{ capital }}
+        <span *ngIf="!capital">N/A</span>
+      </div>
+
+      <div>
+        <span class="single-country-titles">Currency:</span>{{ currencyCode }}
+        <span *ngIf="!currencyCode">N/A</span>
+      </div>
+    </div>
+    <div class="inner-country-wrapper-right">
+      <h3>Statistics</h3>
+      <div>
+        <span class="single-country-titles">Population:</span
+        >{{ population | number: "1.0-0" }}
+        <span *ngIf="!population">N/A</span>
+      </div>
+
+      <div>
+        <span class="single-country-titles">Area kM&#178;:</span
+        >{{ area | number: "1.0-0" }}
+        <span *ngIf="!area">N/A</span>
+      </div>
+      <div>
+        <span class="single-country-titles">Population / kM&#178;:</span
+        >{{ space | number: "1.0-0" }}
+        <span *ngIf="!space">N/A</span>
+      </div>
+      <div>
+        <span class="single-country-titles">Geo Name ID:</span>{{ geoNameId }}
+        <span *ngIf="!geoNameId">N/A</span>
+      </div>
+      <div>
+        <span class="single-country-titles">Country Code:</span
+        >{{ countryCode }}
+        <span *ngIf="!countryCode">N/A</span>
+      </div>
+    </div>
+    <div>
+      <app-button
+        [class]="class"
+        (click)="closeShowSingleCountry()"
+        [label]="label"
+        >X</app-button
+      >
+    </div>
+  </div>
+</ng-template>
+
+<div *ngIf="!error">
+  <div class="data-table-container">
+    <div class="search-wrapper">
+      <app-input
+        #Input
+        (keyup)="onSearch($event)"
+        [(ngModel)]="searchTerm"
+        [placeholder]="placeholder"
+        ngDefaultControl
+      ></app-input>
+      <app-button
+        [class]="inputClass"
+        (click)="clearInput(Input)"
+        [label]="inputButton"
+        >X</app-button
+      >
+    </div>
+
+    <div class="table-row header">
+      <div class="wrapper text-4">
+        <div class="wrapper text-2">
+          <div class="text">
+            <div class=" arrow-wrapper">
+              <span class="arrow-text-spacer"> Country</span>
+              <a
+                href="#"
+                (click)="sortType('country_up')"
+                *ngIf="showCountryArrows"
+              >
+                <div class="arrow-up"></div>
+              </a>
+              <a
+                href="#"
+                (click)="sortType('country_down')"
+                *ngIf="!showCountryArrows"
+              >
+                <div class="arrow-down"></div>
+              </a>
+            </div>
+          </div>
+          <div class="text">
+            <div class=" arrow-wrapper">
+              <span class="arrow-text-spacer">Continent</span>
+              <a
+                href="#"
+                (click)="sortType('continent_up')"
+                *ngIf="showContinentArrows"
+              >
+                <div class="arrow-up"></div
+              ></a>
+              <a
+                href="#"
+                (click)="sortType('continent_down')"
+                *ngIf="!showContinentArrows"
+              >
+                <div class="arrow-down"></div
+              ></a>
+            </div>
+          </div>
+        </div>
+        <div class="wrapper text-2">
+          <div class="text">Capital</div>
+          <div class="text">Country Code</div>
+        </div>
+        <div class="wrapper text-2">
+          <div class="text">
+            <div class=" arrow-wrapper">
+              <span class="arrow-text-spacer">Area kM&#178;</span>
+              <a href="#" (click)="sortType('area_up')" *ngIf="showAreaArrows">
+                <div class="arrow-up"></div
+              ></a>
+              <a
+                href="#"
+                (click)="sortType('area_down')"
+                *ngIf="!showAreaArrows"
+              >
+                <div class="arrow-down"></div
+              ></a>
+            </div>
+          </div>
+          <div class="text">
+            <div class=" arrow-wrapper">
+              <span class="arrow-text-spacer">Population</span>
+              <a
+                href="#"
+                (click)="sortType('population_up')"
+                *ngIf="showPopulationArrows"
+              >
+                <div class="arrow-up"></div
+              ></a>
+              <a
+                href="#"
+                (click)="sortType('population_down')"
+                *ngIf="!showPopulationArrows"
+              >
+                <div class="arrow-down"></div
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!geoData">
+      <div class="spinner-wrapper">
+        <app-spinner></app-spinner>
+      </div>
+    </div>
+    <div
+      class="table-row"
+      *ngFor="let data of geoData | countryFilter: searchTerm; let i = index"
+      (click)="showCountryData(data)"
+    >
+      <div class="wrapper text-4">
+        <div class="wrapper text-2">
+          <div class="text">
+            {{ data.countryName }}
+            <span *ngIf="!data.countryName">N/A</span>
+          </div>
+          <div class="text">
+            {{ data.continentName }}
+            <span *ngIf="!data.continentName">N/A</span>
+          </div>
+        </div>
+        <div class="wrapper text-2">
+          <div class="text">
+            {{ data.capital }}
+            <span *ngIf="!data.capital">N/A</span>
+          </div>
+          <div class="text">
+            {{ data.countryCode }}
+            <span *ngIf="!data.countryCode">N/A</span>
+          </div>
+        </div>
+        <div class="wrapper text-2">
+          <div class="text">
+            {{ data.areaInSqKm | number: "1.0-0" }}
+            <span *ngIf="!data.areaInSqKm">N/A</span>
+          </div>
+          <div class="text">
+            {{ data.population | number: "1.0-0" }}
+            <span *ngIf="!data.population">N/A</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

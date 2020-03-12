@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "geoNames": {
@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "geoNames"
+    }
+  },
+  "defaultProject": "geoNames",
+  "cli": {
+    "analytics": "7cde769d-bb7f-47c7-98a1-ff687c59a316"
+  }
 }

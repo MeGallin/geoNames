@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --danger: red;
+  --colour-light-blue: lightcyan;
+  --header-height: 3em;
+  --footer-height: 3em;
+}
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: Tahoma, "Segoe UI", Geneva, Verdana, sans-serif;
+}
+h1,
+h2,
+h3,
+p {
+  font-family: Tahoma, "Segoe UI", Geneva, Verdana, sans-serif;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.border-temp {
+  border: 1px solid var(--danger);
+}

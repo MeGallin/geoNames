@@ -1,0 +1,9 @@
+footer {
+  height: var(--footer-height);
+  padding: 0.5em;
+  font-size: 0.75em;
+}
+.footer-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
