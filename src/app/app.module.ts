@@ -15,6 +15,7 @@ import { InputComponent } from "./shared/input/input.component";
 import { CountryFilterPipe } from "./pipes/country-filter.pipe";
 import { ButtonComponent } from './shared/button/button.component';
 import { DateTimeComponent } from './shared/date-time/date-time.component';
+import { GraphStatsComponent } from './components/graph-stats/graph-stats.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { DateTimeComponent } from './shared/date-time/date-time.component';
     InputComponent,
     CountryFilterPipe,
     ButtonComponent,
-    DateTimeComponent
+    DateTimeComponent,
+    GraphStatsComponent
   ],
   imports: [
     BrowserModule,

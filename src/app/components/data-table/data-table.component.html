@@ -2,8 +2,12 @@
 
 <ng-template [ngIf]="showSingleCountry">
   <div class="single-country-wrapper" [@slideInOut]>
+    <div>
+      <app-graph-stats></app-graph-stats>
+    </div>
     <div class="inner-country-wrapper-left">
       <h3>Info</h3>
+
       <div>
         <span class="single-country-titles">Continent:</span>
         <span>{{ continentName }}</span>
